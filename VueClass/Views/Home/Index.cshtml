@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+    <div class="text-center" id="App">
+
+
+
+
+        <h1 class="display-4" v-if="flag">
+
+            {{message.substr(0,5)}}
+
+        </h1>
+        <span v-bind:style="style">baidu.com</span>
+
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+        <input type="button" @@click="Dosomthing" value="按钮" id="btn_a" />
+
+        <div v-for="(item,index) in list" :key="item.id">
+            {{item.text}}
+
+        </div>
+
+        <a v-bind:href="Url">baidu.com</a>
+
+        <a :href="Url">缩写</a>
+
+        <input type="text" :value="message" />
+
+
+        <div>
+
+            文本2：  <input type="text" v-model="message" v-on:keyup.13="Dosomthing" /> <br />
+        </div>
+
+        <div id="first">
+            <input type="button" v-on:click="Dosomthing" :value="ReValue()" />
+        </div>
+
+        
+        <Myimage :imgurl="imgurl" :imgname="imgname" />
+    </div>
+
+
+<script src="~/js/vue.js"></script>
+<script src="~/js/MyImage.js"></script>
+
+
+<script>
+
+    new Vue({
+        el: "#App",
+        data: {
+
+            imgname: "百度",
+            imgurl: "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+
+            style: { color: "red" },
+            Url: "https://www.baidu.com",
+            message: "hello world",//插值表达式
+            count: 1,
+            flag: true,
+            list: [{ id: 1, text: "一" }, { id: 2, text: "二" }, { id: 3, text: "三" }],
+            text: "333",
+            // ReValue:"4444"
+        },
+        //beforeCreate() {
+        //    console.log('beforecreate:', document.getElementById('first'))//null
+        //    console.log('data:', this.text);//undefined
+        //    this.sayHello("beforecreate");//error:not a function
+        //},
+        //created() {
+        //    console.log('create:', document.getElementById('first'))//null
+        //    console.log('data:', this.text);//this.text
+        //    this.sayHello("create");//this.sayHello()
+        //},
+        //beforeMount() {
+        //    console.log('beforeMount:', document.getElementById('first'))//null
+        //    console.log('data:', this.text);//this.text
+        //    this.sayHello("beforeMount");//this.sayHello()
+        //},
+        //mounted() {
+        //    console.log('mounted:', document.getElementById('first'))//<p></p>
+        //    console.log('data:', this.text);//this.text
+        //    this.sayHello("mounted");//this.sayHello()
+        //},
+        watch: {
+            message: function (now, old) {
+                console.log("now", now);
+                console.log("old", old);
+            }
+
+        },
+        methods: {
+            sayHello(val) {
+
+                console.log(val + ":hello");
+            },
+            ReValue() {
+                return "123";
+            },
+            Dosomthing() {
+
+                this.imgname = "青蛙";
+                this.imgurl ="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1089874897,1268118658&fm=26&gp=0.jpg"
+            },
+            Change: function () {
+                this.Url = "http://www.yhwins.com";
+                this.message = "你好vue";
+                console.log("message", this.message);
+
+            }
+        }
+
+
+
+    })
+
+
+
+</script>
